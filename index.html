@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adisyon Uyarısı</title>
+    <style>
+        /* Genel Stil Ayarları */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Birinci Sayfa (Uyarı) Stilleri */
+        .uyari-kutu {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer; /* Tıklanabilir olduğunu belirtir */
+            max-width: 400px;
+            transition: transform 0.2s;
+            border: 2px solid #ff4d4d; /* Kırmızı uyarı çerçevesi */
+        }
+
+        .uyari-kutu:hover {
+            transform: translateY(-5px);
+        }
+
+        .uyari-kutu h2 {
+            color: #d9534f;
+            margin-bottom: 20px;
+        }
+
+        .uyari-kutu p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .uyari-kutu .not {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 20px;
+            border-top: 1px dashed #ccc;
+            padding-top: 15px;
+        }
+
+        /* İkinci Sayfa (Adisyon Fişi) Stilleri */
+        .adisyon-fis {
+            display: none; /* İlk başta gizli, JavaScript ile gösterilecek */
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 450px;
+            border: 1px solid #ddd;
+        }
+
+        .adisyon-baslik {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .adisyon-baslik h1 {
+            color: #333;
+            margin: 0;
+            font-size: 1.8em;
+            flex-grow: 1; /* Başlığın genişlemesini sağlar */
+        }
+
+        .tarih-saat {
+            text-align: right;
+            font-size: 0.9em;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .iletisim-bilgileri {
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #666;
+            line-height: 1.5;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .urun-tablo {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .urun-tablo th, .urun-tablo td {
+            padding: 10px 0;
+            text-align: left;
+            border-bottom: 1px dashed #ccc;
+        }
+        
+        .urun-tablo th:nth-child(2), .urun-tablo td:nth-child(2) { text-align: center; } /* Adet Ortala */
+        .urun-tablo th:nth-child(3), .urun-tablo td:nth-child(3) { text-align: right; } /* Birim Ücret Sağla */
+        .urun-tablo th:last-child, .urun-tablo td:last-child { text-align: right; font-weight: bold; } /* Toplam Ücret Sağla */
+
+        .indirim, .ikram {
+            color: #4CAF50; /* Yeşil */
+            font-style: italic;
+        }
+        
+        .cikarilan {
+             color: #d9534f; /* Kırmızı */
+             font-weight: bold;
+        }
+
+        .toplam-alan {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 3px double #333;
+            text-align: right;
+        }
+
+        .toplam-alan strong {
+            font-size: 2.2em; /* Büyük punto */
+            font-weight: 900; /* Ekstra kalınlık */
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="uyari-kutu" id="uyariSayfasi" onclick="gosterAdisyon()">
+        <h2>⚠️ Ödenmemiş Adisyon Uyarısı</h2>
+        <p>Sn. **Ekinsu**</p>
+        <p>Adınıza ait bir adet **ödenmemiş adisyon** bulunmaktadır.</p>
+        <div class="not">
+            (Lütfen ödeme yaptıysanız bu uyarıyı dikkate almayınız)
+        </div>
+        <p style="margin-top: 30px; font-weight: bold;">(Ayrıntılar için tıklayın)</p>
+    </div>
+
+    <div class="adisyon-fis" id="adisyonSayfasi">
+        
+        <div class="adisyon-baslik">
+            <h1>Love Restaurant 💖</h1>
+            <div class="tarih-saat">
+                **30.11.2025**<br>
+                **19.08**
+            </div>
+        </div>
+        
+        <div class="iletisim-bilgileri">
+            Mersis no: **58949216**<br>
+            İrtibat Tel: **05449389718**
+        </div>
+
+        <table class="urun-tablo">
+            <thead>
+                <tr>
+                    <th style="width: 50%;">Ürün</th>
+                    <th style="width: 15%; text-align: center;">Adet</th>
+                    <th style="width: 15%; text-align: right;">Birim Ücret</th>
+                    <th style="width: 20%; text-align: right;">Toplam Ücret</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Labneli Poğaça</td>
+                    <td>4</td>
+                    <td style="text-align: right;">15 Kiss</td>
+                    <td style="text-align: right;">60 Kiss</td>
+                </tr>
+                <tr>
+                    <td>Patates Salatası</td>
+                    <td>1</td>
+                    <td style="text-align: right;">30 Kiss</td>
+                    <td style="text-align: right;">30 Kiss</td>
+                </tr>
+                <tr class="ikram">
+                    <td>Çay</td>
+                    <td>-</td>
+                    <td style="text-align: right;">-</td>
+                    <td style="text-align: right;">İkram</td>
+                </tr>
+                <tr class="cikarilan">
+                    <td>Çiğköfte Hediyesi</td>
+                    <td>-</td>
+                    <td style="text-align: right;"></td>
+                    <td style="text-align: right;">(–20 Kiss)</td>
+                </tr>
+                <tr class="cikarilan">
+                    <td>İndirim</td>
+                    <td>-</td>
+                    <td style="text-align: right;"></td>
+                    <td style="text-align: right;">(–15 Kiss)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="toplam-alan">
+            Toplam Tutar: <strong>55 Kiss</strong>
+        </div>
+        
+    </div>
+
+    <script>
+        function gosterAdisyon() {
+            document.getElementById('uyariSayfasi').style.display = 'none'; // Uyarıyı gizle
+            document.getElementById('adisyonSayfasi').style.display = 'block'; // Adisyonu göster
+            document.body.style.justifyContent = 'flex-start'; // Adisyonu yukarı hizala
+            document.body.style.alignItems = 'flex-start';
+            document.body.style.padding = '50px'; // Üstten boşluk ekle
+        }
+    </script>
+
+</body>
+</html>
