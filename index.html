@@ -102,13 +102,21 @@
             flex-grow: 1;
         }
 
-        .tarih-saat {
+        .bilgi-kolonu {
             text-align: right;
             font-size: 1em;
             color: #555;
             line-height: 1.5;
-            font-weight: 600; /* Kalınlık vurgusu yerine 600 */
+            font-weight: 600;
         }
+        /* Yeni Garson Bilgisi Stili */
+        .bilgi-kolonu .garson {
+            font-size: 0.9em;
+            font-weight: 500;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
 
         .iletisim-bilgileri {
             margin-top: -15px;
@@ -141,18 +149,19 @@
             border-bottom: 1px dashed #e0e0e0; /* Yumuşak kesik çizgi */
         }
         
-        /* Sütun Hizalamaları */
-        .urun-tablo th:nth-child(2), .urun-tablo td:nth-child(2) { text-align: center; }
-        .urun-tablo th:nth-child(3), .urun-tablo td:nth-child(3) { text-align: right; }
-        .urun-tablo th:last-child, .urun-tablo td:last-child { text-align: right; font-weight: bold; }
+        /* Sütun Hizalamaları ve GENİŞLİKLERİ (DEĞİŞEN KISIM) */
+        .urun-tablo th:nth-child(1), .urun-tablo td:nth-child(1) { width: 40%; } /* Ürün (Daraltıldı) */
+        .urun-tablo th:nth-child(2), .urun-tablo td:nth-child(2) { width: 10%; text-align: center; } /* Adet (Aynı) */
+        .urun-tablo th:nth-child(3), .urun-tablo td:nth-child(3) { width: 25%; text-align: right; } /* Birim Ücret (Genişletildi) */
+        .urun-tablo th:last-child, .urun-tablo td:last-child { width: 25%; text-align: right; font-weight: bold; } /* Toplam Ücret (Genişletildi) */
 
         .ikram td:last-child {
-            color: #4CAF50; /* Yeşil */
+            color: #4CAF50; 
             font-style: italic;
         }
         
         .cikarilan td {
-             color: #e53935; /* Koyu kırmızı */
+             color: #e53935; 
              font-style: italic;
         }
         .cikarilan td:last-child {
@@ -162,15 +171,15 @@
         .toplam-alan {
             margin-top: 30px;
             padding-top: 25px;
-            border-top: 4px double #000; /* Çift çizgi */
+            border-top: 4px double #000; 
             text-align: right;
         }
 
         .toplam-alan strong {
             font-size: 2.5em; 
             font-weight: 900; 
-            color: #e53935; /* Toplam tutarı kırmızı ve dikkat çekici yap */
-            display: block; /* Yeni satıra al */
+            color: #e53935; 
+            display: block; 
         }
         .toplam-alan span {
             font-size: 1.2em;
@@ -195,8 +204,8 @@
         
         <div class="adisyon-baslik">
             <h1>Love Restaurant 💖</h1>
-            <div class="tarih-saat">
-                30.11.2025<br>
+            <div class="bilgi-kolonu">
+                <div class="garson">Garson: Ufuk</div> 30.11.2025<br>
                 19.08
             </div>
         </div>
@@ -209,11 +218,8 @@
         <table class="urun-tablo">
             <thead>
                 <tr>
-                    <th style="width: 50%;">Ürün</th>
-                    <th style="width: 15%; text-align: center;">Adet</th>
-                    <th style="width: 15%; text-align: right;">Birim Ücret</th>
-                    <th style="width: 20%; text-align: right;">Toplam Ücret</th>
-                </tr>
+                    <th style="width: 40%;">Ürün</th> <th style="width: 10%; text-align: center;">Adet</th>
+                    <th style="width: 25%; text-align: right;">Birim Ücret</th> <th style="width: 25%; text-align: right;">Toplam Ücret</th> </tr>
             </thead>
             <tbody>
                 <tr>
@@ -258,12 +264,11 @@
 
     <script>
         function gosterAdisyon() {
-            document.getElementById('uyariSayfasi').style.display = 'none'; // Uyarıyı gizle
-            document.getElementById('adisyonSayfasi').style.display = 'block'; // Adisyonu göster
-            // Adisyon gösterildiğinde sayfa düzenini ayarla
+            document.getElementById('uyariSayfasi').style.display = 'none'; 
+            document.getElementById('adisyonSayfasi').style.display = 'block'; 
             document.body.style.justifyContent = 'center'; 
-            document.body.style.alignItems = 'flex-start'; // Yukarı hizala
-            document.body.style.padding = '50px 0'; // Üstten ve alttan boşluk ekle
+            document.body.style.alignItems = 'flex-start'; 
+            document.body.style.padding = '50px 0'; 
         }
     </script>
 
