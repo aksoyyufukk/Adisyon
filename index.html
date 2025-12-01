@@ -7,60 +7,82 @@
     <style>
         /* Genel Stil Ayarları */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f0f2f5; /* Açık gri/mavi arka plan */
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            color: #333;
         }
 
         /* Birinci Sayfa (Uyarı) Stilleri */
         .uyari-kutu {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 12px; /* Daha yuvarlak köşeler */
+            box-shadow: 0 10px 25px rgba(255, 82, 82, 0.2); /* Hafif kırmızı gölge */
             text-align: center;
-            cursor: pointer; /* Tıklanabilir olduğunu belirtir */
-            max-width: 400px;
-            transition: transform 0.2s;
-            border: 2px solid #ff4d4d; /* Kırmızı uyarı çerçevesi */
+            cursor: pointer;
+            max-width: 450px;
+            transition: all 0.3s ease-in-out;
+            border: 1px solid #ffcccc; /* İnce çerçeve */
         }
 
         .uyari-kutu:hover {
-            transform: translateY(-5px);
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(255, 82, 82, 0.3);
         }
 
         .uyari-kutu h2 {
-            color: #d9534f;
-            margin-bottom: 20px;
+            color: #e53935; /* Koyu kırmızı */
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            letter-spacing: 0.5px;
         }
 
         .uyari-kutu p {
-            color: #333;
-            line-height: 1.6;
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1em;
             margin-bottom: 10px;
         }
         
         .uyari-kutu .not {
             font-size: 0.9em;
             color: #777;
-            margin-top: 20px;
-            border-top: 1px dashed #ccc;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
             padding-top: 15px;
+            font-style: italic;
+        }
+
+        .uyari-kutu .btn-tıkla {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #e53935;
+            color: #fff;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+        }
+
+        .uyari-kutu .btn-tıkla:hover {
+            background-color: #c62828;
         }
 
         /* İkinci Sayfa (Adisyon Fişi) Stilleri */
         .adisyon-fis {
-            display: none; /* İlk başta gizli, JavaScript ile gösterilecek */
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            width: 450px;
+            display: none;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            width: 480px;
             border: 1px solid #ddd;
         }
 
@@ -68,71 +90,92 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            border-bottom: 2px solid #333;
+            border-bottom: 3px solid #000; /* Daha belirgin alt çizgi */
             padding-bottom: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .adisyon-baslik h1 {
-            color: #333;
+            color: #4CAF50; /* Restoran için yeşil renk */
             margin: 0;
-            font-size: 1.8em;
-            flex-grow: 1; /* Başlığın genişlemesini sağlar */
+            font-size: 2.2em;
+            flex-grow: 1;
         }
 
         .tarih-saat {
             text-align: right;
-            font-size: 0.9em;
+            font-size: 1em;
             color: #555;
-            line-height: 1.4;
+            line-height: 1.5;
+            font-weight: 600; /* Kalınlık vurgusu yerine 600 */
         }
 
         .iletisim-bilgileri {
-            margin-top: 10px;
-            font-size: 0.85em;
+            margin-top: -15px;
+            font-size: 0.9em;
             color: #666;
-            line-height: 1.5;
-            padding-bottom: 10px;
+            line-height: 1.6;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #eee;
         }
 
         .urun-tablo {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 15px;
+            font-size: 1.0em;
         }
 
-        .urun-tablo th, .urun-tablo td {
+        .urun-tablo th {
+            padding: 12px 0;
+            text-align: left;
+            border-bottom: 2px solid #ccc;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .urun-tablo td {
             padding: 10px 0;
             text-align: left;
-            border-bottom: 1px dashed #ccc;
+            border-bottom: 1px dashed #e0e0e0; /* Yumuşak kesik çizgi */
         }
         
-        .urun-tablo th:nth-child(2), .urun-tablo td:nth-child(2) { text-align: center; } /* Adet Ortala */
-        .urun-tablo th:nth-child(3), .urun-tablo td:nth-child(3) { text-align: right; } /* Birim Ücret Sağla */
-        .urun-tablo th:last-child, .urun-tablo td:last-child { text-align: right; font-weight: bold; } /* Toplam Ücret Sağla */
+        /* Sütun Hizalamaları */
+        .urun-tablo th:nth-child(2), .urun-tablo td:nth-child(2) { text-align: center; }
+        .urun-tablo th:nth-child(3), .urun-tablo td:nth-child(3) { text-align: right; }
+        .urun-tablo th:last-child, .urun-tablo td:last-child { text-align: right; font-weight: bold; }
 
-        .indirim, .ikram {
+        .ikram td:last-child {
             color: #4CAF50; /* Yeşil */
             font-style: italic;
         }
         
-        .cikarilan {
-             color: #d9534f; /* Kırmızı */
-             font-weight: bold;
+        .cikarilan td {
+             color: #e53935; /* Koyu kırmızı */
+             font-style: italic;
+        }
+        .cikarilan td:last-child {
+             font-weight: 600;
         }
 
         .toplam-alan {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 3px double #333;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 4px double #000; /* Çift çizgi */
             text-align: right;
         }
 
         .toplam-alan strong {
-            font-size: 2.2em; /* Büyük punto */
-            font-weight: 900; /* Ekstra kalınlık */
+            font-size: 2.5em; 
+            font-weight: 900; 
+            color: #e53935; /* Toplam tutarı kırmızı ve dikkat çekici yap */
+            display: block; /* Yeni satıra al */
+        }
+        .toplam-alan span {
+            font-size: 1.2em;
             color: #000;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -140,12 +183,12 @@
 
     <div class="uyari-kutu" id="uyariSayfasi" onclick="gosterAdisyon()">
         <h2>⚠️ Ödenmemiş Adisyon Uyarısı</h2>
-        <p>Sn. **Ekinsu**</p>
-        <p>Adınıza ait bir adet **ödenmemiş adisyon** bulunmaktadır.</p>
+        <p>Sn. Ekinsu</p>
+        <p>Adınıza ait bir adet ödenmemiş adisyon bulunmaktadır.</p>
+        <p class="btn-tıkla">Ayrıntılar için Tıklayın</p>
         <div class="not">
             (Lütfen ödeme yaptıysanız bu uyarıyı dikkate almayınız)
         </div>
-        <p style="margin-top: 30px; font-weight: bold;">(Ayrıntılar için tıklayın)</p>
     </div>
 
     <div class="adisyon-fis" id="adisyonSayfasi">
@@ -153,14 +196,14 @@
         <div class="adisyon-baslik">
             <h1>Love Restaurant 💖</h1>
             <div class="tarih-saat">
-                **30.11.2025**<br>
-                **19.08**
+                30.11.2025<br>
+                19.08
             </div>
         </div>
         
         <div class="iletisim-bilgileri">
-            Mersis no: **58949216**<br>
-            İrtibat Tel: **05449389718**
+            Mersis no: 58949216<br>
+            İrtibat Tel: 05449389718
         </div>
 
         <table class="urun-tablo">
@@ -176,38 +219,39 @@
                 <tr>
                     <td>Labneli Poğaça</td>
                     <td>4</td>
-                    <td style="text-align: right;">15 Kiss</td>
-                    <td style="text-align: right;">60 Kiss</td>
+                    <td>15 Kiss</td>
+                    <td>60 Kiss</td>
                 </tr>
                 <tr>
                     <td>Patates Salatası</td>
                     <td>1</td>
-                    <td style="text-align: right;">30 Kiss</td>
-                    <td style="text-align: right;">30 Kiss</td>
+                    <td>30 Kiss</td>
+                    <td>30 Kiss</td>
                 </tr>
                 <tr class="ikram">
                     <td>Çay</td>
                     <td>-</td>
-                    <td style="text-align: right;">-</td>
-                    <td style="text-align: right;">İkram</td>
+                    <td>-</td>
+                    <td>İkram</td>
                 </tr>
                 <tr class="cikarilan">
                     <td>Çiğköfte Hediyesi</td>
                     <td>-</td>
-                    <td style="text-align: right;"></td>
-                    <td style="text-align: right;">(–20 Kiss)</td>
+                    <td></td>
+                    <td>(–20 Kiss)</td>
                 </tr>
                 <tr class="cikarilan">
                     <td>İndirim</td>
                     <td>-</td>
-                    <td style="text-align: right;"></td>
-                    <td style="text-align: right;">(–15 Kiss)</td>
+                    <td></td>
+                    <td>(–15 Kiss)</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="toplam-alan">
-            Toplam Tutar: <strong>55 Kiss</strong>
+            <span>Toplam Tutar:</span>
+            <strong>55 Kiss</strong>
         </div>
         
     </div>
@@ -216,9 +260,10 @@
         function gosterAdisyon() {
             document.getElementById('uyariSayfasi').style.display = 'none'; // Uyarıyı gizle
             document.getElementById('adisyonSayfasi').style.display = 'block'; // Adisyonu göster
-            document.body.style.justifyContent = 'flex-start'; // Adisyonu yukarı hizala
-            document.body.style.alignItems = 'flex-start';
-            document.body.style.padding = '50px'; // Üstten boşluk ekle
+            // Adisyon gösterildiğinde sayfa düzenini ayarla
+            document.body.style.justifyContent = 'center'; 
+            document.body.style.alignItems = 'flex-start'; // Yukarı hizala
+            document.body.style.padding = '50px 0'; // Üstten ve alttan boşluk ekle
         }
     </script>
 
